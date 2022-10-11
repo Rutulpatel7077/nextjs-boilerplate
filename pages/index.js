@@ -1,8 +1,27 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import usePWA from '../hooks/usePWA'
 
 export default function Home() {
+  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
+
+  const onClickInstall = async () => {
+    const didInstall = await promptInstall()
+    if (didInstall) {
+      // User accepted PWA install
+      console.log('Installed')
+    }
+  }
+
+  const renderInstallButton = () => {
+    if (isInstallPromptSupported && isStandalone)
+      return (
+        <button onClick={onClickInstall}>Prompt PWA Install</button>
+      )
+    return null
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -50,6 +69,7 @@ export default function Home() {
             </p>
           </a>
         </div>
+        {renderInstallButton()}
       </main>
 
       <footer className={styles.footer}>
