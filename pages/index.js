@@ -4,7 +4,11 @@ import styles from '../styles/Home.module.css'
 import usePWA from '../hooks/usePWA'
 
 export default function Home() {
-  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
+  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA();
+
+  console.log({
+    isStandalone, isInstallPromptSupported, promptInstall
+  })
 
   const onClickInstall = async () => {
     const didInstall = await promptInstall()
@@ -19,7 +23,7 @@ export default function Home() {
       return (
         <button onClick={onClickInstall}>Prompt PWA Install</button>
       )
-    return null
+    return <h3>Not supported</h3>
   }
 
   return (
