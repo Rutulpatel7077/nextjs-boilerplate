@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   const renderInstallButton = () => {
-    if (isInstallPromptSupported && isStandalone)
+    if (isInstallPromptSupported)
       return (
         <button onClick={onClickInstall}>Prompt PWA Install</button>
       )
